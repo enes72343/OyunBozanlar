@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oyun Bozanlar - Mahalle Takımı</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Oyun Bozanlar - Mahalle Takımı</h1>
+
+        <!-- Duyurular -->
+        <section id="duyurular">
+            <h2>Duyurular</h2>
+            <form id="duyuruEkleForm">
+                <textarea id="duyuruMetni" placeholder="Yeni duyuru ekleyin..." required></textarea>
+                <button type="submit">Duyuru Ekle</button>
+            </form>
+            <ul id="duyuruListesi"></ul>
+        </section>
+
+        <!-- Maçlar -->
+        <section id="maclar">
+            <h2>Maçlar</h2>
+            <ul id="macListesi">
+                <li>10 Ekim - Oyun Bozanlar vs Şampiyonlar (3-2)</li>
+                <li>17 Ekim - Oyun Bozanlar vs Galibiyet Takımı (19:00)</li>
+            </ul>
+        </section>
+
+        <!-- Puan Tablosu -->
+        <section id="puan-tablosu">
+            <h2>Puan Tablosu</h2>
+            <table>
+                <tr>
+                    <th>Takım</th>
+                    <th>Puan</th>
+                </tr>
+                <tr>
+                    <td>Oyun Bozanlar</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Şampiyonlar</td>
+                    <td>8</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Kartvizit Giriş -->
+        <section id="kartvizit-giris">
+            <h2>Kartvizit Girişi</h2>
+            <div class="kartvizit-okuma">
+                <div class="kartvizit-animasyon"></div>
+                <input type="file" id="kartvizitYukle" accept="image/*" hidden>
+                <label for="kartvizitYukle" class="yukle-buton">Kartvizit Yükle</label>
+            </div>
+            <p id="sonuc"></p>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
