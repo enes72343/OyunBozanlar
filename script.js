@@ -34,80 +34,24 @@ function duyurulariGoster() {
     });
 }
 
-// Kartvizit resmi yüklendiğinde çalışacak fonksiyon
-document.getElementById('kartvizitYukle').addEventListener('change', function (e) {
-    const dosya = e.target.files[0];
-    if (dosya) {
-        const okuyucu = new FileReader();
-        okuyucu.onload = function (e) {
-            const resimURL = e.target.result;
-
-            // Kartvizit doğrulama işlemi
-            const dogrulamaSonucu = kartvizitDogrula(resimURL);
-
-            // Sonucu ekranda göster
-            const sonucElementi = document.getElementById('sonuc');
-            if (dogrulamaSonucu) {
-                sonucElementi.textContent = 'Giriş Başarılı!';
-                sonucElementi.style.color = 'green';
-            } else {
-                sonucElementi.textContent = 'Geçersiz Kartvizit!';
-                sonucElementi.style.color = 'red';
-            }
-        };
-        okuyucu.readAsDataURL(dosya);
-    }
-});
-
-// Kartvizit doğrulama fonksiyonu
-function kartvizitDogrula(resimURL) {
-    // Burada kartvizitin doğruluğunu kontrol edebilirsiniz.
-    // Örneğin, önceden tanımlanmış bir kartvizit resmiyle karşılaştırma yapabilirsiniz.
-    const gercekKartvizitURL = 'Memo.jpg';
-    const gercekKartvizitURL = 'Yiğit.jpg';
-    const gercekKartvizitURL = 'Arda.jpg';
-    const gercekKartvizitURL = 'Enes.jpg';
-
-    // Basit bir karşılaştırma (gerçekte daha karmaşık bir doğrulama yapılmalı)
-    return resimURL === gercekKartvizitURL;
-}
-
 // Bildirim gönderme fonksiyonu
 function bildirimGonder(baslik, icerik) {
-    if ('serviceWorker' in navigator && 'PushManager' in window) {
-        navigator.serviceWorker.ready.then((registration) => {
-            registration.active.postMessage({
-                baslik: baslik,
-                icerik: icerik,
-            });
+    if (Notification.permission === 'granted') {
+        new Notification(baslik, {
+            body: icerik,
+            icon: 'logo.png', // Bildirim ikonu (isteğe bağlı)
         });
-    }
-}
-
-// Service Worker'ı kaydetme
-if ('serviceWorker' in navigator && 'PushManager' in window) {
-    navigator.serviceWorker.register('sw.js')
-        .then((registration) => {
-            console.log('Service Worker kaydedildi:', registration);
-        })
-        .catch((error) => {
-            console.error('Service Worker kaydı başarısız:', error);
-        });
-}
-
-// Bildirim izni isteme
-function bildirimIzinIste() {
-    if (Notification.permission !== 'granted') {
+    } else if (Notification.permission !== 'denied') {
         Notification.requestPermission().then((permission) => {
             if (permission === 'granted') {
-                console.log('Bildirim izni verildi.');
+                new Notification(baslik, {
+                    body: icerik,
+                    icon: 'logo.png', // Bildirim ikonu (isteğe bağlı)
+                });
             }
         });
     }
 }
-
-// Sayfa yüklendiğinde bildirim izni iste
-bildirimIzinIste();
 
 // Sayfa yüklendiğinde duyuruları göster
 duyurulariGoster();
