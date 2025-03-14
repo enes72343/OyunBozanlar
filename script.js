@@ -63,7 +63,10 @@ document.getElementById('kartvizitYukle').addEventListener('change', function (e
 function kartvizitDogrula(resimURL) {
     // Burada kartvizitin doğruluğunu kontrol edebilirsiniz.
     // Örneğin, önceden tanımlanmış bir kartvizit resmiyle karşılaştırma yapabilirsiniz.
-    const gercekKartvizitURL = 'gercek_kartvizit.jpg'; // Örnek kartvizit URL'si
+    const gercekKartvizitURL = 'Memo.jpg';
+    const gercekKartvizitURL = 'Yiğit.jpg';
+    const gercekKartvizitURL = 'Arda.jpg';
+    const gercekKartvizitURL = 'Enes.jpg';
 
     // Basit bir karşılaştırma (gerçekte daha karmaşık bir doğrulama yapılmalı)
     return resimURL === gercekKartvizitURL;
