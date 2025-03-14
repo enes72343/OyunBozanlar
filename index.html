@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oyun Bozanlar - Mahalle Takımı</title>
+    <title>E-posta ile Duyuru Gönderme</title>
     <link rel="stylesheet" href="styles.css">
-     <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-messaging.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Oyun Bozanlar - Mahalle Takımı</h1>
+        <h1>E-posta ile Duyuru Gönderme</h1>
 
-        <!-- Duyurular -->
+        <!-- E-posta Gönderme Formu -->
         <section id="duyurular">
-            <h2>Duyurular</h2>
+            <h2>Duyuru Gönder</h2>
             <form id="duyuruEkleForm">
-                <textarea id="duyuruMetni" placeholder="Yeni duyuru ekleyin..." required></textarea>
-                <button type="submit">Duyuru Ekle</button>
+                <input type="email" id="email" placeholder="Alıcı e-posta adresi" required>
+                <textarea id="duyuruMetni" placeholder="Duyuru metni girin..." required></textarea>
+                <button type="submit">E-posta Gönder</button>
             </form>
-            <ul id="duyuruListesi"></ul>
+            <p id="sonuc"></p>
         </section>
     </div>
 
