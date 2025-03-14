@@ -26,3 +26,15 @@ self.addEventListener('notificationclick', (event) => {
         clients.openWindow('https://www.oyunbozanlar.com') // Bildirime tıklandığında açılacak sayfa
     );
 });
+
+// Mesajları dinleme
+self.addEventListener('message', (event) => {
+    const { baslik, icerik } = event.data;
+
+    // Bildirimi göster
+    self.registration.showNotification(baslik, {
+        body: icerik,
+        icon: 'logo.png', // Bildirim ikonu (isteğe bağlı)
+        vibrate: [200, 100, 200], // Titreşim (mobilde)
+    });
+});
