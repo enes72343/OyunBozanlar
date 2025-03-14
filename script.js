@@ -71,21 +71,15 @@ function kartvizitDogrula(resimURL) {
 
 // Bildirim gönderme fonksiyonu
 function bildirimGonder(baslik, icerik) {
-    if (Notification.permission === 'granted') {
-        const bildirim = new Notification(baslik, {
-            body: icerik,
-            icon: 'logo.png', // Bildirim ikonu (isteğe bağlı)
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+        navigator.serviceWorker.ready.then((registration) => {
+            registration.active.postMessage({
+                baslik: baslik,
+                icerik: icerik,
+            });
         });
-
-        // Bildirime tıklandığında yapılacak işlem
-        bildirim.onclick = function () {
-            window.focus();
-        };
     }
 }
-
-// Sayfa yüklendiğinde duyuruları göster
-duyurulariGoster();
 
 // Service Worker'ı kaydetme
 if ('serviceWorker' in navigator && 'PushManager' in window) {
@@ -97,14 +91,20 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
             console.error('Service Worker kaydı başarısız:', error);
         });
 }
-// Bildirim gönderme fonksiyonu
-function bildirimGonder(baslik, icerik) {
-    if ('serviceWorker' in navigator && 'PushManager' in window) {
-        navigator.serviceWorker.ready.then((registration) => {
-            registration.active.postMessage({
-                baslik: baslik,
-                icerik: icerik,
-            });
+
+// Bildirim izni isteme
+function bildirimIzinIste() {
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission().then((permission) => {
+            if (permission === 'granted') {
+                console.log('Bildirim izni verildi.');
+            }
         });
     }
 }
+
+// Sayfa yüklendiğinde bildirim izni iste
+bildirimIzinIste();
+
+// Sayfa yüklendiğinde duyuruları göster
+duyurulariGoster();
