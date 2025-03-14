@@ -86,3 +86,25 @@ function bildirimGonder(baslik, icerik) {
 
 // Sayfa yüklendiğinde duyuruları göster
 duyurulariGoster();
+
+// Service Worker'ı kaydetme
+if ('serviceWorker' in navigator && 'PushManager' in window) {
+    navigator.serviceWorker.register('sw.js')
+        .then((registration) => {
+            console.log('Service Worker kaydedildi:', registration);
+        })
+        .catch((error) => {
+            console.error('Service Worker kaydı başarısız:', error);
+        });
+}
+// Bildirim gönderme fonksiyonu
+function bildirimGonder(baslik, icerik) {
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+        navigator.serviceWorker.ready.then((registration) => {
+            registration.active.postMessage({
+                baslik: baslik,
+                icerik: icerik,
+            });
+        });
+    }
+}
