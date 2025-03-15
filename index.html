@@ -3,25 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-posta ile Duyuru Gönderme</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Bildirim Gönder</title>
 </head>
 <body>
-    <div class="container">
-        <h1>E-posta ile Duyuru Gönderme</h1>
+    <h1>Bildirim Gönderme Örneği</h1>
+    <button id="izinVer">Bildirimlere İzin Ver</button>
+    <button id="bildirimGonder">Bildirim Gönder</button>
 
-        <!-- E-posta Gönderme Formu -->
-        <section id="duyurular">
-            <h2>Duyuru Gönder</h2>
-            <form id="duyuruEkleForm">
-                <input type="email" id="email" placeholder="Alıcı e-posta adresi" required>
-                <textarea id="duyuruMetni" placeholder="Duyuru metni girin..." required></textarea>
-                <button type="submit">E-posta Gönder</button>
-            </form>
-            <p id="sonuc"></p>
-        </section>
-    </div>
+    <script>
+        // Bildirim izni isteme
+        document.getElementById('izinVer').addEventListener('click', function() {
+            Notification.requestPermission().then(function(permission) {
+                if (permission === 'granted') {
+                    alert('Bildirimlere izin verildi!');
+                } else {
+                    alert('Bildirimlere izin verilmedi.');
+                }
+            });
+        });
 
-    <script src="script.js"></script>
+        // Bildirim gönderme
+        document.getElementById('bildirimGonder').addEventListener('click', function() {
+            if (Notification.permission === 'granted') {
+                new Notification('Merhaba!', {
+                    body: 'Bu bir test bildirimidir.',
+                    icon: 'https://example.com/icon.png'
+                });
+            } else {
+                alert('Bildirim göndermek için izin verilmedi.');
+            }
+        });
+    </script>
 </body>
 </html>
