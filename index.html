@@ -3,36 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bildirim Gönder</title>
+    <title>Oyun Bozanlar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="//code.jivosite.com/widget/iIa9rP26KO" async></script>
 </head>
 <body>
-    <h1>Bildirim Gönderme Örneği</h1>
-    <button id="izinVer">Bildirimlere İzin Ver</button>
-    <button id="bildirimGonder">Bildirim Gönder</button>
+    <header>
+        <h1>Oyun Bozanlar</h1>
+        <nav>
+            <ul>
+                <li><a href="#maclar">Maçlar</a></li>
+                <li><a href="#puan-listesi">Puan Listesi</a></li>
+                <li><a href="#oyuncular">Oyuncular</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <script>
-        // Bildirim izni isteme
-        document.getElementById('izinVer').addEventListener('click', function() {
-            Notification.requestPermission().then(function(permission) {
-                if (permission === 'granted') {
-                    alert('Bildirimlere izin verildi!');
-                } else {
-                    alert('Bildirimlere izin verilmedi.');
-                }
-            });
-        });
+    <section id="maclar" class="info-box">
+        <h2>Maçlar</h2>
+        <p>En Güncel Bilgiler İçin Sağ Alttaki Köşeden Mesaj Atınız!</p>
+        <div id="mac-listesi"></div>
+    </section>
 
-        // Bildirim gönderme
-        document.getElementById('bildirimGonder').addEventListener('click', function() {
-            if (Notification.permission === 'granted') {
-                new Notification('Merhaba!', {
-                    body: 'Bu bir test bildirimidir.',
-                    icon: 'https://example.com/icon.png'
-                });
-            } else {
-                alert('Bildirim göndermek için izin verilmedi.');
-            }
-        });
-    </script>
+    <section id="puan-listesi" class="info-box">
+        <h2>Puan Listesi</h2>
+        <p>En Güncel Bilgiler İçin Sağ Alttaki Köşeden Mesaj Atınız!</p>
+        <div id="puan-tablosu"></div>
+    </section>
+
+    <section id="oyuncular" class="info-box">
+        <h2>Oyuncular</h2>
+        <ul id="oyuncu-listesi">
+            <li>Mehmet</li>
+            <li>Enes</li>
+            <li>Özcan</li>
+            <li>Yiğit.T</li>
+            <li>M.Yiğit</li>
+            <li>Kerim</li>
+            <li>Fatih</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p> 2023 Oyun Bozanlar© Tüm Hakları Saklıdır</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
