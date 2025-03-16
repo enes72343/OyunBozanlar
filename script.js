@@ -1,26 +1,16 @@
-document.getElementById('duyuruEkleForm').addEventListener('submit', function (e) {
-    e.preventDefault(); // Formun gönderilmesini engelle
+document.addEventListener("DOMContentLoaded", function() {
+    // Maçlar bölümüne dinamik içerik ekleme
+    const maclarSection = document.getElementById("mac-listesi");
+    maclarSection.innerHTML = `
+        <p>Maç 1: Oyun Bozanlar vs Belirli Değil - Sonuç: Yakında </p>
+        <p>Maç 2: Oyun Bozanlar vs Belirli Değil - Sonuç: Yakında</p>
+    `;
 
-    // E-posta ve duyuru metnini al
-    const email = document.getElementById('email').value;
-    const duyuruMetni = document.getElementById('duyuruMetni').value;
-
-    // Backend'e istek gönder
-    fetch('/send-email', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            email: email,
-            message: duyuruMetni,
-        }),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        document.getElementById('sonuc').textContent = data.message;
-    })
-    .catch((error) => {
-        document.getElementById('sonuc').textContent = 'E-posta gönderilirken hata oluştu.';
-    });
+    // Puan listesi bölümüne dinamik içerik ekleme
+    const puanListesiSection = document.getElementById("puan-tablosu");
+    puanListesiSection.innerHTML = `
+        <p>1. Oyun Bozanlar - 20 Puan</p>
+        <p>2. Yıldız City - 12 Puan</p>
+        <p>3. PonçikSpor - Belli Değil</p>
+    `;
 });
